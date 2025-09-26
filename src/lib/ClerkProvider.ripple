@@ -1,0 +1,108 @@
+import type {
+	ActClaim,
+	ClientResource,
+	InitialState,
+	JwtPayload,
+	OrganizationCustomPermissionKey,
+	OrganizationCustomRoleKey,
+	OrganizationResource,
+	Resources,
+	SessionStatusClaim,
+	SignedInSessionResource,
+	UserResource
+} from '@clerk/types';
+import { loadClerkJsScript } from '@clerk/shared/loadClerkJsScript';
+import { createContext, effect, track, type Tracked, untrack } from 'ripple'
+import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types'
+import { deriveState } from '@clerk/shared/deriveState'
+
+interface ClerkContext {
+	/**
+	 * See https://clerk.com/docs/references/javascript/clerk
+	 */
+	clerk: Tracked<HeadlessBrowserClerk | BrowserClerk | null>;
+	/**
+	 * Check if the Clerk object is ready for use or not
+	 */
+	isLoaded: Tracked<boolean>;
+	auth: Tracked<{
+		userId: string | null | undefined;
+		sessionId: string | null | undefined;
+		actor: ActClaim | null | undefined;
+		sessionStatus: SessionStatusClaim | null | undefined;
+		sessionClaims: JwtPayload | null | undefined;
+		orgId: string | null | undefined;
+		orgRole: OrganizationCustomRoleKey | null | undefined;
+		orgSlug: string | null | undefined;
+		orgPermissions: OrganizationCustomPermissionKey[] | null | undefined;
+		factorVerificationAge: [number, number] | null;
+	}>;
+	/**
+	 * See https://clerk.com/docs/references/javascript/client
+	 */
+	client: Tracked<ClientResource | null | undefined>;
+	/**
+	 * See https://clerk.com/docs/references/javascript/session
+	 */
+	session: Tracked<SignedInSessionResource | null | undefined>;
+	/**
+	 * See https://clerk.com/docs/references/javascript/user
+	 */
+	user: Tracked<UserResource | null | undefined>;
+	/**
+	 * See https://clerk.com/docs/references/javascript/organization
+	 */
+	organization: Tracked<OrganizationResource | null | undefined>;
+}
+
+const clerkContext = createContext({} as ClerkContext)
+
+export component ClerkProvider(props: ClerkProviderProps) {
+  const obj = clerkContext.get();
+
+  obj.clerk = track(null)
+  obj.isLoaded = track(false)
+  let resources = track<Resources>({
+    client: undefined as unknown as ClientResource,
+		session: undefined,
+		user: undefined,
+		organization: undefined
+  })
+
+	obj.auth = track(() => deriveState(obj.@isLoaded, @resources, undefined))
+	obj.client = track(() => @resources.client)
+	obj.session = track(() => obj.@auth.session)
+	obj.user = track(() => obj.@auth.user)
+	obj.organization = track(() => obj.@auth.organization)
+
+	const [children, rest] = track(props, { split: ['children'] })
+
+  async function loadClerk() {
+		await loadClerkJsScript({ ...@rest });
+
+		if (!window.Clerk) {
+			throw new Error('Clerk script failed to load');
+		}
+
+		obj.@clerk = window.Clerk;
+		await obj.@clerk.load({ ...@rest });
+
+		obj.@isLoaded = true;
+
+		obj.@clerk.addListener((payload) => {
+			@resources = payload
+		});
+	}
+  
+  effect(() => {
+		untrack(loadClerk)
+  })
+
+	<@children />
+}
+
+export function useClerkContext() {
+  const obj = clerkContext.get();
+
+	return obj
+}

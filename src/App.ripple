@@ -1,0 +1,63 @@
+import { effect, track } from 'ripple';
+import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.ripple'
+
+export component App() {
+	<ClerkProvider publishableKey={''}>
+		<div class='container'>
+		<h1>{'Welcome to Ripple!'}</h1>
+		<div class='counter'>
+			let count = track(0);
+			const ctx = useClerkContext()
+	
+			effect(() => {
+				console.log(ctx.@auth)
+			})
+
+			<button onClick={() => @count--}>{'-'}</button>
+			<span class='count'>{@count}</span>
+			<button onClick={() => @count++}>{'+'}</button>
+		</div>
+		<div>
+			<p>{'This is a basic Ripple application template.'}</p>
+			<p>
+				{'Edit '}
+				<code>{'src/App.ripple'}</code>
+				{' to get started.'}
+			</p>
+		</div>
+	</div>
+</ClerkProvider>
+
+	<style>
+	  .container {
+			text-align: center;
+			font-family: "Arial", sans-serif;
+		}
+		  p {
+			margin: 12px 0;
+			font-family: "Arial", sans-serif;
+		}
+		  code {
+			background: #f4f4f4;
+			padding: 2px 6px;
+			border-radius: 4px;
+			font-family: "Courier New", monospace;
+			color: #333;
+		}
+		  button {
+			font-size: 1.5em;
+			padding: 6px 12px;
+			margin: 0 6px;
+			cursor: pointer;
+			border: none;
+			font-family: "Courier New", monospace;
+		}
+		  button {
+			background-color: #e0e0e0;
+		}
+		  .count {
+			margin: 0 12px;
+			font-size: 1.5em;
+		}
+	</style>
+}
