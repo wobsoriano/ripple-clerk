@@ -1,30 +1,23 @@
 import { effect, track } from 'ripple';
 import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.ripple'
+import { ClerkLoading, SignedIn, SignedOut } from './lib/components/controlComponents.ripple'
+import { SignIn, UserButton } from './lib/components/uiComponents.ripple'
 
 export component App() {
 	<ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
 		<div class='container'>
 		<h1>{'Welcome to Ripple!'}</h1>
-		<div class='counter'>
-			let count = track(0);
-			const { auth } = useClerkContext()
-	
-			effect(() => {
-				console.log(@auth)
-			})
-
-			<button onClick={() => @count--}>{'-'}</button>
-			<span class='count'>{@count}</span>
-			<button onClick={() => @count++}>{'+'}</button>
-		</div>
-		<div>
-			<p>{'This is a basic Ripple application template.'}</p>
-			<p>
-				{'Edit '}
-				<code>{'src/App.ripple'}</code>
-				{' to get started.'}
-			</p>
-		</div>
+		<ClerkLoading>
+			<p>{'Clerk loading..'}</p>
+		</ClerkLoading>
+		<SignedIn>
+      <p>{'You are signed in'}</p>
+			<UserButton />
+		</SignedIn>
+		<SignedOut>
+      <p>{'You are signed out'}</p>
+			<SignIn />
+		</SignedOut>
 	</div>
 </ClerkProvider>
 

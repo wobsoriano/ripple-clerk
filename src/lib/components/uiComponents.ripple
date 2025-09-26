@@ -1,0 +1,47 @@
+import type { SignInProps, SignUpProps, UserButtonProps, UserProfileProps } from '@clerk/types'
+import { clerkHostRenderer } from './ClerkHostRenderer.ripple'
+import { useClerkContext } from '../ClerkProvider.ripple'
+
+export component SignIn(props: SignInProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountSignIn,
+    unmount: @clerk.unmountSignIn,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component SignUp(props: SignUpProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountSignUp,
+    unmount: @clerk.unmountSignUp,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component UserButton(props: UserButtonProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountUserButton,
+    unmount: @clerk.unmountUserButton,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component UserProfile(props: UserProfileProps) {
+  const { clerk } = useClerkContext()
+  
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountUserProfile,
+    unmount: @clerk.unmountUserProfile,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
