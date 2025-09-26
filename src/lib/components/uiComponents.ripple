@@ -7,7 +7,9 @@ import type {
   SignUpProps,
   UserButtonProps,
   UserProfileProps,
-  GoogleOneTapProps
+  GoogleOneTapProps,
+WaitlistProps,
+CreateOrganizationProps
 } from '@clerk/types'
 import { clerkHostRenderer } from './ClerkHostRenderer.ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
@@ -62,6 +64,28 @@ export component GoogleOneTap(props: GoogleOneTapProps) {
   <div {ref clerkHostRenderer({
     open: @clerk.openGoogleOneTap,
     close: @clerk.closeGoogleOneTap,
+    updateProps: (@clerk as any).__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component Waitlist(props: WaitlistProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountWaitlist,
+    unmount: @clerk.unmountWaitlist,
+    updateProps: (@clerk as any).__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component CreateOrganization(props: CreateOrganizationProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountCreateOrganization,
+    unmount: @clerk.unmountCreateOrganization,
     updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>

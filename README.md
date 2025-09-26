@@ -33,6 +33,39 @@ export component App() {
 }
 ```
 
+## Features
+
+#### Components
+
+To see all available props for each component, visit the [Clerk UI Components](https://clerk.com/docs/reference/components/overview) docs.
+
+- `<SignIn />`
+- `<SignUp />`
+- `<UserButton />`
+- `<UserProfile />`
+- `<OrganizationProfile />`
+- `<OrganizationList />`
+- `<OrganizationSwitcher />`
+- `<CreateOrganization />`
+- `<Waitlist />`
+- `<GoogleOneTap />`
+- `<SignedIn />`
+- `<SignedOut />`
+- `<Protect />`
+- `<ClerkLoaded />`
+- `<ClerkLoading />`
+
+#### `useClerkContext()`
+
+Provides various tracked states to interact with Clerk's resources.
+
+- `auth` - [Auth](https://clerk.com/docs/references/nextjs/auth-object#auth-object) object.
+- `user` - Authenticated [user](https://clerk.com/docs/references/javascript/user/user).
+- `organization` - Active [organization](https://clerk.com/docs/references/javascript/organization/organization) of the authenticated user.
+- `session` - [Session](https://clerk.com/docs/references/javascript/session) of the authenticated user.
+- `clerk` - [Clerk](https://clerk.com/docs/references/javascript/clerk/clerk) object.
+- `isLoaded` - Indicates if Clerk has finished loading.
+
 ## License
 
 MIT
