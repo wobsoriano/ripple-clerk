@@ -74,12 +74,12 @@ import { useClerkContext } from 'ripple-clerk'
 export component CurrentUser() {
     const { isLoaded, user } = useClerkContext()
 
-    if (!isLoaded) {
+    if (!@isLoaded) {
         <div>{'Loading...'}</div>
-    } else if (user === null) {
+    } else if (@user === null) {
         <div>{'Not signed in'}</div>
     } else {
-        <div>{`Hello ${user.fullName}`}</div>
+        <div>{`Hello ${@user.fullName}`}</div>
     }
 }
 ```
