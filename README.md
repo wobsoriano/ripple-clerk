@@ -1,6 +1,6 @@
 # ripple-clerk
 
-Community Clerk integration for Ripple.
+Unofficial Clerk integration for Ripple.
 
 ## Installation
 
