@@ -66,6 +66,24 @@ Provides various tracked states to interact with Clerk's resources.
 - `clerk` - [Clerk](https://clerk.com/docs/references/javascript/clerk/clerk) object.
 - `isLoaded` - Indicates if Clerk has finished loading.
 
+Example:
+
+```tsx
+import { useClerkContext } from 'ripple-clerk'
+
+export component App() {
+    const { isLoaded, user } = useClerkContext()
+
+    if (!isLoaded) {
+        <div>{'Loading...'}</div>
+    } else if (user === null) {
+        <div>{'Not signed in'}</div>
+    } else {
+        <div>{`Hello ${user.fullName}`}</div>
+    }
+}
+```
+
 ## License
 
 MIT
