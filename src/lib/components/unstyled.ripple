@@ -1,0 +1,85 @@
+import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/types';
+import type { PropsWithChildren } from 'ripple'
+import { track } from 'ripple'
+import { useClerkContext } from '../ClerkProvider.ripple'
+
+type SignInButtonProps = PropsWithChildren<_SignInButtonProps> & {
+  style?: string
+  class?: string
+}
+
+export component SignInButton(props: SignInButtonProps) {
+  const { clerk } = useClerkContext()
+
+  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+
+  function signIn() {
+		if (!@clerk) {
+      return
+    };
+
+		if (@mode === 'modal') {
+			void @clerk.openSignIn(@rest);
+			return;
+		}
+
+		void @clerk.redirectToSignIn({
+			...@rest,
+			signInFallbackRedirectUrl: props.fallbackRedirectUrl,
+			signInForceRedirectUrl: props.forceRedirectUrl
+		});
+	}
+
+  <button type="button" style={@style} class={@className} onClick={signIn}>Sign in</button>
+}
+
+type SignUpButtonProps = PropsWithChildren<_SignUpButtonProps> & {
+  style?: string
+  class?: string
+}
+
+export component SignUpButton(props: SignUpButtonProps) {
+  const { clerk } = useClerkContext()
+
+  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+
+  function signUp() {
+		if (!@clerk) {
+      return
+    };
+
+		if (@mode === 'modal') {
+			void @clerk.openSignUp(@rest);
+			return;
+		}
+
+		void @clerk.redirectToSignUp({
+			...@rest,
+			signUpFallbackRedirectUrl: props.fallbackRedirectUrl,
+			signUpForceRedirectUrl: props.forceRedirectUrl
+		});
+	}
+
+  <button type="button" style={@style} class={@className} onClick={signUp}>Sign up</button>
+}
+
+type SignOutButtonProps = PropsWithChildren<SignOutOptions> & {
+  style?: string
+  class?: string
+}
+
+export component SignOutButton(props: SignUpButtonProps) {
+  const { clerk } = useClerkContext()
+
+  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+
+  function signOut() {
+		if (!@clerk) {
+      return
+    };
+
+		@clerk.signOut(@rest);
+	}
+
+  <button type="button" style={@style} class={@className} onClick={signOut}>Sign out</button>
+}

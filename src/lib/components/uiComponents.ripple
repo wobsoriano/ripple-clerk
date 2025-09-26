@@ -1,4 +1,11 @@
-import type { SignInProps, SignUpProps, UserButtonProps, UserProfileProps } from '@clerk/types'
+import type {
+  OrganizationProfileProps,
+  PricingTableProps,
+	SignInProps,
+  SignUpProps,
+  UserButtonProps,
+  UserProfileProps
+} from '@clerk/types'
 import { clerkHostRenderer } from './ClerkHostRenderer.ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
 
@@ -37,10 +44,32 @@ export component UserButton(props: UserButtonProps) {
 
 export component UserProfile(props: UserProfileProps) {
   const { clerk } = useClerkContext()
-  
+
   <div {ref clerkHostRenderer({
     mount: @clerk.mountUserProfile,
     unmount: @clerk.unmountUserProfile,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component OrganizationProfile(props: OrganizationProfileProps) {
+  const { clerk } = useClerkContext()
+  
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountOrganizationProfile,
+    unmount: @clerk.unmountOrganizationProfile,
+    updateProps: @clerk.__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component PricingTable(props: PricingTableProps) {
+  const { clerk } = useClerkContext()
+  
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountPricingTable,
+    unmount: @clerk.unmountPricingTable,
     updateProps: @clerk.__unstable__updateProps,
     props
   })}></div>
