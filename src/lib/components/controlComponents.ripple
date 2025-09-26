@@ -4,40 +4,41 @@ import { track } from 'ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
 import { createCheckAuthorization } from '@clerk/shared/authorization';
 
-export component SignedIn(props: PropsWithChildren<{}>) {
+export component SignedIn({ children }: PropsWithChildren<{}>) {
   const { auth } = useClerkContext()
 
   if (@auth.userId) {
-    <props.@children />
+    <@children />
   }
 }
 
-export component SignedOut(props: PropsWithChildren<{}>) {
+export component SignedOut({ children }: PropsWithChildren<{}>) {
   const { auth } = useClerkContext()
 
   if (@auth.userId === null) {
-    <props.@children />
+    <@children />
   }
 }
 
-export component ClerkLoaded(props: PropsWithChildren<{}>) {
+export component ClerkLoaded({ children }: PropsWithChildren<{}>) {
   const { isLoaded } = useClerkContext()
 
   if (@isLoaded) {
-    <props.@children />
+    <@children />
   }
 }
 
-export component ClerkLoading(props: PropsWithChildren<{}>) {
+export component ClerkLoading({ children }: PropsWithChildren<{}>) {
   const { isLoaded } = useClerkContext()
 
   if (!@isLoaded) {
-    <props.@children />
+    <@children />
   }
 }
 
 export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: Component }) {
   const { auth } = useClerkContext()
+  const [children, fallback] = track(props, { split: ['children', 'fallback'] })
 
   const isAuthorized = track(() => {
 		const { userId } = @auth;
@@ -72,8 +73,8 @@ export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: C
 	});
 
   if (@isAuthorized) {
-    <props.@children />
+    <@children />
   } else {
-    <props.@fallback />
+    <@fallback />
   }
 }
