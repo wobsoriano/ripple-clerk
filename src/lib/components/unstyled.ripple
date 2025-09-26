@@ -13,7 +13,7 @@ export component SignInButton(props: SignInButtonProps) {
 
   const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
 
-  function signIn() {
+  function onClick() {
 		if (!@clerk) {
       return
     };
@@ -30,7 +30,7 @@ export component SignInButton(props: SignInButtonProps) {
 		});
 	}
 
-  <button type="button" style={@style} class={@className} onClick={signIn}>Sign in</button>
+  <button type="button" style={@style} class={@className} {onClick}>{'Sign in'}</button>
 }
 
 type SignUpButtonProps = PropsWithChildren<_SignUpButtonProps> & {
@@ -43,7 +43,7 @@ export component SignUpButton(props: SignUpButtonProps) {
 
   const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
 
-  function signUp() {
+  function onClick() {
 		if (!@clerk) {
       return
     };
@@ -60,7 +60,7 @@ export component SignUpButton(props: SignUpButtonProps) {
 		});
 	}
 
-  <button type="button" style={@style} class={@className} onClick={signUp}>Sign up</button>
+  <button type="button" style={@style} class={@className} {onClick}>{'Sign up'}</button>
 }
 
 type SignOutButtonProps = PropsWithChildren<SignOutOptions> & {
@@ -68,12 +68,12 @@ type SignOutButtonProps = PropsWithChildren<SignOutOptions> & {
   class?: string
 }
 
-export component SignOutButton(props: SignUpButtonProps) {
+export component SignOutButton(props: SignOutButtonProps) {
   const { clerk } = useClerkContext()
 
   const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
 
-  function signOut() {
+  function onClick() {
 		if (!@clerk) {
       return
     };
@@ -81,5 +81,5 @@ export component SignOutButton(props: SignUpButtonProps) {
 		@clerk.signOut(@rest);
 	}
 
-  <button type="button" style={@style} class={@className} onClick={signOut}>Sign out</button>
+  <button type="button" style={@style} class={@className} {onClick}>{'Sign out'}</button>
 }
