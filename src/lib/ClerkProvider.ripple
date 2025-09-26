@@ -93,9 +93,9 @@ export component ClerkProvider(props: ClerkProviderProps) {
 			throw new Error('Clerk script failed to load');
 		}
 
+		@clerk = window.Clerk;
 		await window.Clerk.load({ ...@rest });
 
-		@clerk = window.Clerk;
 		@isLoaded = true;
 
 		window.Clerk.addListener((payload) => {
