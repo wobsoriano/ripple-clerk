@@ -71,7 +71,7 @@ Example:
 ```tsx
 import { useClerkContext } from 'ripple-clerk'
 
-export component App() {
+export component CurrentUser() {
     const { isLoaded, user } = useClerkContext()
 
     if (!isLoaded) {
