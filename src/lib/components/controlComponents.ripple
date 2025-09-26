@@ -1,7 +1,8 @@
-import { useClerkContext } from '../ClerkProvider.ripple'
 import type { Component, PropsWithChildren } from 'ripple'
 import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/types'
 import { track } from 'ripple'
+import { useClerkContext } from '../ClerkProvider.ripple'
+import { createCheckAuthorization } from '@clerk/shared/authorization';
 
 export component SignedIn(props: PropsWithChildren<{}>) {
   const { auth } = useClerkContext()
@@ -36,7 +37,7 @@ export component ClerkLoading(props: PropsWithChildren<{}>) {
 }
 
 export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: Component }) {
-  const { auth, isLoaded } = useClerkContext()
+  const { auth } = useClerkContext()
 
   const isAuthorized = track(() => {
 		const { userId } = @auth;
