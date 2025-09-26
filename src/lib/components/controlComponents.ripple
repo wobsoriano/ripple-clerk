@@ -1,0 +1,78 @@
+import { useClerkContext } from '../ClerkProvider.ripple'
+import type { Component, PropsWithChildren } from 'ripple'
+import { track } from 'ripple'
+import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/types'
+
+export component SignedIn(props: PropsWithChildren<{}>) {
+  const { auth } = useClerkContext()
+
+  if (@auth.userId) {
+    <props.@children />
+  }
+}
+
+export component SignedOut(props: PropsWithChildren<{}>) {
+  const { auth } = useClerkContext()
+
+  if (@auth.userId === null) {
+    <props.@children />
+  }
+}
+
+export component ClerkLoaded(props: PropsWithChildren<{}>) {
+  const { isLoaded } = useClerkContext()
+
+  if (@isLoaded) {
+    <props.@children />
+  }
+}
+
+export component ClerkLoading(props: PropsWithChildren<{}>) {
+  const { isLoaded } = useClerkContext()
+
+  if (!@isLoaded) {
+    <props.@children />
+  }
+}
+
+export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: Component }) {
+  const { auth, isLoaded } = useClerkContext()
+
+  const isAuthorized = track(() => {
+		const { userId } = @auth;
+    const { role, condition, permission, feature, plan } = props
+
+		if (!userId) return false;
+
+		const has = createCheckAuthorization({
+			userId,
+			orgId: @auth.orgId,
+			orgRole: @auth.orgRole,
+			orgPermissions: @auth.orgPermissions,
+			factorVerificationAge: @auth.factorVerificationAge,
+			features: ((@auth.sessionClaims as JwtPayload | undefined)?.fea as string) || '',
+			plans: ((@auth.sessionClaims as JwtPayload | undefined)?.pla as string) || ''
+		});
+
+		if (typeof condition === 'function') {
+			return condition(has);
+		}
+
+		if (role || permission || feature || plan) {
+			return has({
+				role,
+				permission,
+				feature,
+				plan
+			} as Parameters<CheckAuthorizationWithCustomPermissions>[0]);
+		}
+
+		return true;
+	});
+
+  if (@isAuthorized) {
+    <props.@children />
+  } else {
+    <props.@fallback />
+  }
+}

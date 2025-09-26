@@ -2,15 +2,15 @@ import { effect, track } from 'ripple';
 import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.ripple'
 
 export component App() {
-	<ClerkProvider publishableKey={''}>
+	<ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
 		<div class='container'>
 		<h1>{'Welcome to Ripple!'}</h1>
 		<div class='counter'>
 			let count = track(0);
-			const ctx = useClerkContext()
+			const { auth } = useClerkContext()
 	
 			effect(() => {
-				console.log(ctx.@auth)
+				console.log(@auth)
 			})
 
 			<button onClick={() => @count--}>{'-'}</button>

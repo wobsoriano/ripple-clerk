@@ -15,6 +15,7 @@ import { loadClerkJsScript } from '@clerk/shared/loadClerkJsScript';
 import { createContext, effect, track, type Tracked, untrack } from 'ripple'
 import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types'
 import { deriveState } from '@clerk/shared/deriveState'
+import { errorThrower } from './errors/errorThrower'
 
 interface ClerkContext {
 	/**
@@ -102,7 +103,13 @@ export component ClerkProvider(props: ClerkProviderProps) {
 }
 
 export function useClerkContext() {
-  const obj = clerkContext.get();
+  const ctx = clerkContext.get();
 
-	return obj
+	if (!Object.keys(ctx).length) {
+    return errorThrower.throw(
+      `useClerkContext can only be used within the <ClerkProvider> component.`,
+    );
+  }
+
+	return ctx
 }
