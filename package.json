@@ -1,6 +1,6 @@
 {
 	"name": "ripple-clerk",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Unofficial Ripple SDK for Clerk",
 	"type": "module",
 	"engines": {
