@@ -1,10 +1,13 @@
 import type {
   OrganizationProfileProps,
+  OrganizationListProps,
+  OrganizationSwitcherProps,
   PricingTableProps,
 	SignInProps,
   SignUpProps,
   UserButtonProps,
-  UserProfileProps
+  UserProfileProps,
+  GoogleOneTapProps
 } from '@clerk/types'
 import { clerkHostRenderer } from './ClerkHostRenderer.ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
@@ -53,12 +56,45 @@ export component UserProfile(props: UserProfileProps) {
   })}></div>
 }
 
+export component GoogleOneTap(props: GoogleOneTapProps) {
+  const { clerk } = useClerkContext()
+
+  <div {ref clerkHostRenderer({
+    open: @clerk.openGoogleOneTap,
+    close: @clerk.closeGoogleOneTap,
+    updateProps: (@clerk as any).__unstable__updateProps,
+    props
+  })}></div>
+}
+
 export component OrganizationProfile(props: OrganizationProfileProps) {
   const { clerk } = useClerkContext()
   
   <div {ref clerkHostRenderer({
     mount: @clerk.mountOrganizationProfile,
     unmount: @clerk.unmountOrganizationProfile,
+    updateProps: (@clerk as any).__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component OrganizationSwitcher(props: OrganizationSwitcherProps) {
+  const { clerk } = useClerkContext()
+  
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountOrganizationSwitcher,
+    unmount: @clerk.unmountOrganizationSwitcher,
+    updateProps: (@clerk as any).__unstable__updateProps,
+    props
+  })}></div>
+}
+
+export component OrganizationList(props: OrganizationListProps) {
+  const { clerk } = useClerkContext()
+  
+  <div {ref clerkHostRenderer({
+    mount: @clerk.mountOrganizationList,
+    unmount: @clerk.unmountOrganizationList,
     updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
