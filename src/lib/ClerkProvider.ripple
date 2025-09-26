@@ -59,10 +59,8 @@ interface ClerkContext {
 const clerkContext = createContext({} as ClerkContext)
 
 export component ClerkProvider(props: ClerkProviderProps) {
-  const obj = clerkContext.get();
-
-  obj.clerk = track(null)
-  obj.isLoaded = track(false)
+  let clerk = track(null)
+  let isLoaded = track(false)
   let resources = track<Resources>({
     client: undefined as unknown as ClientResource,
 		session: undefined,
@@ -70,11 +68,21 @@ export component ClerkProvider(props: ClerkProviderProps) {
 		organization: undefined
   })
 
-	obj.auth = track(() => deriveState(obj.@isLoaded, @resources, undefined))
-	obj.client = track(() => @resources.client)
-	obj.session = track(() => obj.@auth.session)
-	obj.user = track(() => obj.@auth.user)
-	obj.organization = track(() => obj.@auth.organization)
+	const auth = track(() => deriveState(@isLoaded, @resources, undefined))
+	const client = track(() => @resources.client)
+	const session = track(() => @auth.session)
+	const user = track(() => @auth.user)
+	const organization = track(() => @auth.organization)
+
+	clerkContext.set({
+		clerk,
+		isLoaded,
+		auth,
+		client,
+		session,
+		user,
+		organization
+	})
 
 	const [children, rest] = track(props, { split: ['children'] })
 
@@ -85,12 +93,12 @@ export component ClerkProvider(props: ClerkProviderProps) {
 			throw new Error('Clerk script failed to load');
 		}
 
-		obj.@clerk = window.Clerk;
-		await obj.@clerk.load({ ...@rest });
+		await window.Clerk.load({ ...@rest });
 
-		obj.@isLoaded = true;
+		@clerk = window.Clerk;
+		@isLoaded = true;
 
-		obj.@clerk.addListener((payload) => {
+		window.Clerk.addListener((payload) => {
 			@resources = payload
 		});
 	}

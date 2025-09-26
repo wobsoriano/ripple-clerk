@@ -15,7 +15,7 @@ export component SignIn(props: SignInProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountSignIn,
     unmount: @clerk.unmountSignIn,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -26,7 +26,7 @@ export component SignUp(props: SignUpProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountSignUp,
     unmount: @clerk.unmountSignUp,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -37,7 +37,7 @@ export component UserButton(props: UserButtonProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountUserButton,
     unmount: @clerk.unmountUserButton,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -48,7 +48,7 @@ export component UserProfile(props: UserProfileProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountUserProfile,
     unmount: @clerk.unmountUserProfile,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -59,7 +59,7 @@ export component OrganizationProfile(props: OrganizationProfileProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountOrganizationProfile,
     unmount: @clerk.unmountOrganizationProfile,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -70,7 +70,7 @@ export component PricingTable(props: PricingTableProps) {
   <div {ref clerkHostRenderer({
     mount: @clerk.mountPricingTable,
     unmount: @clerk.unmountPricingTable,
-    updateProps: @clerk.__unstable__updateProps,
+    updateProps: (@clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
