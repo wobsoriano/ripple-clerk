@@ -1,49 +1,32 @@
-# Ripple Basic Template
+# ripple-clerk
 
-A minimal Ripple application template with TypeScript and Vite.
+Unofficial Clerk SDK for Ripple
 
-## Getting Started
+## Installation
 
-1. Install dependencies:
+```bash
+npm install ripple-clerk
+```
 
-    ```bash
-    npm install # or pnpm or yarn
-    ```
+## Usage
 
-2. Start the development server:
+```ts
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from 'ripple-clerk';
 
-    ```bash
-    npm run dev
-    ```
+export component App() {
+    <ClerkProvider>
+        <SignedIn>
+            <p>{'You are signed in'}</p>
+            <UserButton />
+        </SignedIn>
+        <SignedOut>
+            <p>{'You are signed out'}</p>
+            <SignInButton />
+        </SignedOut>
+    </ClerkProvider>
+}
+```
 
-3. Build for production:
-    ```bash
-    npm run build
-    ```
+## License
 
-## Code Formatting
-
-This template includes Prettier with the Ripple plugin for consistent code formatting.
-
-### Available Commands
-
-- `npm run format` - Format all files
-- `npm run format:check` - Check if files are formatted correctly
-
-### Configuration
-
-Prettier is configured in `.prettierrc` with the following settings:
-
-- Uses tabs for indentation
-- Single quotes for strings
-- 100 character line width
-- Includes the `prettier-plugin-ripple` for `.ripple` file formatting
-
-### VS Code Integration
-
-For the best development experience, install the [Prettier VS Code extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and the [Ripple VS Code extension](https://marketplace.visualstudio.com/items?itemName=ripplejs.ripple-vscode-plugin).
-
-## Learn More
-
-- [Ripple Documentation](https://github.com/trueadm/ripple)
-- [Vite Documentation](https://vitejs.dev/)
+MIT

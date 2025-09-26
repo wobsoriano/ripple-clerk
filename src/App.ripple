@@ -7,7 +7,7 @@ import { SignInButton} from './lib/components/unstyled.ripple'
 export component App() {
 	<ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
 		<div class='container'>
-		<h1>{'Welcome to Ripple!'}</h1>
+		<h1>{'Welcome to Ripple + Clerk!'}</h1>
 		<ClerkLoading>
 			<p>{'Clerk loading..'}</p>
 		</ClerkLoading>

@@ -1,13 +1,14 @@
 {
 	"name": "ripple-clerk",
 	"version": "0.0.3",
-	"description": "",
+	"description": "Unofficial Ripple SDK for Clerk",
 	"type": "module",
 	"engines": {
 		"node": ">=20.0.0"
 	},
 	"exports": {
-		".": "./src/lib/index.ts"
+		".": "./src/lib/index.ts",
+    "./package.json": "./package.json"
 	},
 	"files": [
 		"src/lib",
@@ -29,12 +30,15 @@
 		"prettier-plugin-ripple": "^0.2.80",
 		"typescript": "^5.9.2",
 		"vite": "^7.1.7",
-		"vite-plugin-ripple": "^0.2.80"
+		"vite-plugin-ripple": "^0.2.80",
+		"ripple": "^0.2.80"
 	},
 	"dependencies": {
 		"@clerk/shared": "^3.26.1",
-		"@clerk/types": "^4.88.0",
-		"ripple": "^0.2.80"
+		"@clerk/types": "^4.88.0"
+	},
+	"peerDependencies": {
+		"ripple": "*"
 	},
 	"packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }

@@ -14,9 +14,6 @@ importers:
       '@clerk/types':
         specifier: ^4.88.0
         version: 4.88.0
-      ripple:
-        specifier: ^0.2.80
-        version: 0.2.80
     devDependencies:
       bumpp:
         specifier: ^10.2.3
@@ -27,6 +24,9 @@ importers:
       prettier-plugin-ripple:
         specifier: ^0.2.80
         version: 0.2.80(prettier@3.6.2)
+      ripple:
+        specifier: ^0.2.80
+        version: 0.2.80
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
