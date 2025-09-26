@@ -7,11 +7,7 @@
 		"node": ">=20.0.0"
 	},
 	"exports": {
-		".": {
-			"types": "./src/types/index.d.ts",
-			"import": "./src/lib/index.ts",
-			"default": "./src/lib/index.ts"
-		}
+		".": "./src/lib/index.ts"
 	},
 	"files": [
 		"src/lib",
