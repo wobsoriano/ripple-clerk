@@ -1,9 +1,8 @@
 import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/types';
 import type { PropsWithChildren } from 'ripple'
-import { track } from 'ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
 
-type SignInButtonProps = PropsWithChildren<_SignInButtonProps> & {
+type SignInButtonProps = _SignInButtonProps & {
   style?: string
   class?: string
 }
@@ -11,29 +10,29 @@ type SignInButtonProps = PropsWithChildren<_SignInButtonProps> & {
 export component SignInButton(props: SignInButtonProps) {
   const { clerk } = useClerkContext()
 
-  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+	const { mode, style, class: className, ...rest } = props
 
   function onClick() {
 		if (!@clerk) {
       return
     };
 
-		if (@mode === 'modal') {
-			void @clerk.openSignIn(@rest);
+		if (mode === 'modal') {
+			void @clerk.openSignIn(rest);
 			return;
 		}
 
 		void @clerk.redirectToSignIn({
-			...@rest,
+			...rest,
 			signInFallbackRedirectUrl: props.fallbackRedirectUrl,
 			signInForceRedirectUrl: props.forceRedirectUrl
 		});
 	}
 
-  <button type="button" style={@style} class={@className} {onClick}>{'Sign in'}</button>
+  <button type="button" style={props.style} class={props.class} {onClick}>{'Sign in'}</button>
 }
 
-type SignUpButtonProps = PropsWithChildren<_SignUpButtonProps> & {
+type SignUpButtonProps = _SignUpButtonProps & {
   style?: string
   class?: string
 }
@@ -41,29 +40,29 @@ type SignUpButtonProps = PropsWithChildren<_SignUpButtonProps> & {
 export component SignUpButton(props: SignUpButtonProps) {
   const { clerk } = useClerkContext()
 
-  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+	const { mode, style, class: className, ...rest } = props
 
   function onClick() {
 		if (!@clerk) {
       return
     };
 
-		if (@mode === 'modal') {
-			void @clerk.openSignUp(@rest);
+		if (mode === 'modal') {
+			void @clerk.openSignUp(rest);
 			return;
 		}
 
 		void @clerk.redirectToSignUp({
-			...@rest,
+			...rest,
 			signUpFallbackRedirectUrl: props.fallbackRedirectUrl,
 			signUpForceRedirectUrl: props.forceRedirectUrl
 		});
 	}
 
-  <button type="button" style={@style} class={@className} {onClick}>{'Sign up'}</button>
+  <button type="button" style={style} class={className} {onClick}>{'Sign up'}</button>
 }
 
-type SignOutButtonProps = PropsWithChildren<SignOutOptions> & {
+type SignOutButtonProps = SignOutOptions & {
   style?: string
   class?: string
 }
@@ -71,15 +70,15 @@ type SignOutButtonProps = PropsWithChildren<SignOutOptions> & {
 export component SignOutButton(props: SignOutButtonProps) {
   const { clerk } = useClerkContext()
 
-  const [mode, style, className, rest] = track(props, { split: ['mode', 'style', 'class'] })
+	const { style, class: className, ...rest } = props
 
   function onClick() {
 		if (!@clerk) {
       return
     };
 
-		@clerk.signOut(@rest);
+		@clerk.signOut(rest);
 	}
 
-  <button type="button" style={@style} class={@className} {onClick}>{'Sign out'}</button>
+  <button type="button" style={style} class={className} {onClick}>{'Sign out'}</button>
 }
