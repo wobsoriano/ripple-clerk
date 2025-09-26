@@ -13,8 +13,14 @@ npm install ripple-clerk
 ```ts
 import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from 'ripple-clerk';
 
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error('Add your Clerk Publishable Key to the .env file')
+}
+
 export component App() {
-    <ClerkProvider>
+    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
         <SignedIn>
             <p>{'You are signed in'}</p>
             <UserButton />
