@@ -58,6 +58,22 @@ interface ClerkContext {
 
 const clerkContext = createContext({} as ClerkContext)
 
+function watch(deps: Array<any>, cb: () => void) {
+	let first = true;
+
+	effect(() => {
+		deps.forEach((dep) => @dep);
+
+		if (first) {
+			first = false;
+
+			return;
+		}
+
+		return untrack(cb);
+	});
+};
+
 export component ClerkProvider(props: ClerkProviderProps) {
   let clerk = track(null)
   let isLoaded = track(false)
@@ -106,6 +122,24 @@ export component ClerkProvider(props: ClerkProviderProps) {
   effect(() => {
 		untrack(loadClerk)
   })
+
+	const appearance = track(() => props.appearance)
+	const localization = track(() => props.localization)
+
+	watch(
+		[appearance, localization],
+		() => {
+			if (!@clerk) {
+				// @ts-expect-error: Internal unexposed Clerk property
+				@clerk.__unstable__updateProps({
+					options: {
+						localization: @localization
+					},
+					appearance: @appearance
+				});
+			}
+		}
+	)
 
 	<@children />
 }
