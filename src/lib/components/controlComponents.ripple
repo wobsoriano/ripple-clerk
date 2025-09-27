@@ -1,6 +1,6 @@
 import type { Component, PropsWithChildren } from 'ripple'
 import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/types'
-import { track } from 'ripple'
+import { track, trackSplit } from 'ripple'
 import { useClerkContext } from '../ClerkProvider.ripple'
 import { createCheckAuthorization } from '@clerk/shared/authorization';
 
@@ -38,7 +38,7 @@ export component ClerkLoading({ children }: PropsWithChildren<{}>) {
 
 export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: Component }) {
   const { auth } = useClerkContext()
-  const [children, fallback] = track(props, { split: ['children', 'fallback'] })
+  const [children, fallback] = trackSplit(props, ['children', 'fallback'])
 
   const isAuthorized = track(() => {
 		const { userId } = @auth;

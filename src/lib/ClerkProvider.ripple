@@ -12,7 +12,7 @@ import type {
 	UserResource
 } from '@clerk/types';
 import { loadClerkJsScript } from '@clerk/shared/loadClerkJsScript';
-import { createContext, effect, track, type Tracked, untrack } from 'ripple'
+import { createContext, effect, track, trackSplit, type Tracked, untrack } from 'ripple'
 import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types'
 import { deriveState } from '@clerk/shared/deriveState'
 import { errorThrower } from './errors/errorThrower'
@@ -100,7 +100,7 @@ export component ClerkProvider(props: ClerkProviderProps) {
 		organization
 	})
 
-	const [children, rest] = track(props, { split: ['children'] })
+	const [children, rest] = trackSplit(props, ['children'])
 
   async function loadClerk() {
 		await loadClerkJsScript({ ...@rest });
