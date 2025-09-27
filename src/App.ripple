@@ -1,5 +1,5 @@
 import { effect, track } from 'ripple';
-import { ClerkProvider } from './lib/ClerkProvider.ripple'
+import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.ripple'
 import {
 	ClerkLoading,
 	SignedIn,
@@ -17,7 +17,9 @@ export component App() {
 			<p>{'Clerk loading..'}</p>
 		</ClerkLoading>
 		<SignedIn>
+			const { user } = useClerkContext()
       <p>{'You are signed in'}</p>
+			<p>{`Welcome, ${@user.fullName}`}</p>
 			<UserButton />
 		</SignedIn>
 		<SignedOut>

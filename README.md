@@ -10,8 +10,8 @@ npm install ripple-clerk
 
 ## Usage
 
-```ts
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from 'ripple-clerk';
+```tsx
+import { useClerkContext, ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from 'ripple-clerk';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -22,7 +22,8 @@ if (!PUBLISHABLE_KEY) {
 export component App() {
     <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
         <SignedIn>
-            <p>{'You are signed in'}</p>
+            const { user } = useClerkContext()
+            <p>{`Welcome, ${@user.fullName}`}</p>
             <UserButton />
         </SignedIn>
         <SignedOut>
