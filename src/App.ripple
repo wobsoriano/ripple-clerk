@@ -1,8 +1,13 @@
 import { effect, track } from 'ripple';
 import { ClerkProvider } from './lib/ClerkProvider.ripple'
-import { ClerkLoading, SignedIn, SignedOut } from './lib/components/controlComponents.ripple'
-import { SignIn, UserButton } from './lib/components/uiComponents.ripple'
-import { SignInButton} from './lib/components/unstyled.ripple'
+import {
+	ClerkLoading,
+	SignedIn,
+	SignedOut,
+	SignInButton,
+	SignIn,
+	UserButton
+} from '$lib/index.js'
 
 export component App() {
 	<ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
