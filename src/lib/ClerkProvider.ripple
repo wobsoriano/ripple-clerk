@@ -12,7 +12,7 @@ import type {
 	UserResource
 } from '@clerk/types';
 import { loadClerkJsScript } from '@clerk/shared/loadClerkJsScript';
-import { createContext, effect, track, trackSplit, type Tracked, untrack } from 'ripple'
+import { Context, effect, track, trackSplit, type Tracked, untrack } from 'ripple'
 import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types'
 import { deriveState } from '@clerk/shared/deriveState'
 import { errorThrower } from './errors/errorThrower'
@@ -56,7 +56,7 @@ interface ClerkContext {
 	organization: Tracked<OrganizationResource | null | undefined>;
 }
 
-const clerkContext = createContext({} as ClerkContext)
+const clerkContext = new Context({} as ClerkContext)
 
 function watch(deps: Array<any>, cb: () => void) {
 	let first = true;

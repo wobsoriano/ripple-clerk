@@ -27,15 +27,15 @@
 	"devDependencies": {
 		"bumpp": "^10.2.3",
 		"prettier": "^3.6.2",
-		"prettier-plugin-ripple": "^0.2.88",
-		"ripple": "^0.2.88",
-		"typescript": "^5.9.2",
+		"prettier-plugin-ripple": "^0.2.98",
+		"ripple": "^0.2.98",
+		"typescript": "^5.9.3",
 		"vite": "^7.1.7",
-		"vite-plugin-ripple": "^0.2.88"
+		"vite-plugin-ripple": "^0.2.98"
 	},
 	"dependencies": {
-		"@clerk/shared": "^3.27.0",
-		"@clerk/types": "^4.89.0"
+		"@clerk/shared": "^3.27.1",
+		"@clerk/types": "^4.90.0"
 	},
 	"peerDependencies": {
 		"ripple": "*"
