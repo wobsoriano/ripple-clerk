@@ -10,9 +10,9 @@ import type {
   GoogleOneTapProps,
 WaitlistProps,
 CreateOrganizationProps
-} from '@clerk/types'
-import { clerkHostRenderer } from './ClerkHostRenderer.ripple'
-import { useClerkContext } from '../ClerkProvider.ripple'
+} from '@clerk/shared/types'
+import { clerkHostRenderer } from './ClerkHostRenderer.tsrx'
+import { useClerkContext } from '../ClerkProvider.tsrx'
 
 export component SignIn(props: SignInProps) {
   const { clerk } = useClerkContext()
@@ -93,7 +93,7 @@ export component CreateOrganization(props: CreateOrganizationProps) {
 
 export component OrganizationProfile(props: OrganizationProfileProps) {
   const { clerk } = useClerkContext()
-  
+
   <div {ref clerkHostRenderer({
     mount: @clerk.mountOrganizationProfile,
     unmount: @clerk.unmountOrganizationProfile,
@@ -104,7 +104,7 @@ export component OrganizationProfile(props: OrganizationProfileProps) {
 
 export component OrganizationSwitcher(props: OrganizationSwitcherProps) {
   const { clerk } = useClerkContext()
-  
+
   <div {ref clerkHostRenderer({
     mount: @clerk.mountOrganizationSwitcher,
     unmount: @clerk.unmountOrganizationSwitcher,
@@ -115,7 +115,7 @@ export component OrganizationSwitcher(props: OrganizationSwitcherProps) {
 
 export component OrganizationList(props: OrganizationListProps) {
   const { clerk } = useClerkContext()
-  
+
   <div {ref clerkHostRenderer({
     mount: @clerk.mountOrganizationList,
     unmount: @clerk.unmountOrganizationList,
@@ -126,7 +126,7 @@ export component OrganizationList(props: OrganizationListProps) {
 
 export component PricingTable(props: PricingTableProps) {
   const { clerk } = useClerkContext()
-  
+
   <div {ref clerkHostRenderer({
     mount: @clerk.mountPricingTable,
     unmount: @clerk.unmountPricingTable,

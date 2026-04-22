@@ -1,7 +1,7 @@
 import type { Component, PropsWithChildren } from 'ripple'
-import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/types'
+import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/shared/types'
 import { track, trackSplit } from 'ripple'
-import { useClerkContext } from '../ClerkProvider.ripple'
+import { useClerkContext } from '../ClerkProvider.tsrx'
 import { createCheckAuthorization } from '@clerk/shared/authorization';
 
 export component SignedIn({ children }: PropsWithChildren<{}>) {

@@ -1,5 +1,5 @@
 import { effect, track } from 'ripple';
-import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.ripple'
+import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.tsrx'
 import {
 	ClerkLoading,
 	SignedIn,

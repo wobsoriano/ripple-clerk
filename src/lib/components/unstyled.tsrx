@@ -1,6 +1,6 @@
-import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/types';
+import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/shared/types';
 import type { PropsWithChildren } from 'ripple'
-import { useClerkContext } from '../ClerkProvider.ripple'
+import { useClerkContext } from '../ClerkProvider.tsrx'
 
 type SignInButtonProps = _SignInButtonProps & {
   style?: string

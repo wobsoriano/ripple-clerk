@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { ripple } from 'vite-plugin-ripple';
+import { ripple } from '@ripple-ts/vite-plugin';
 import path from 'node:path';
 
 export default defineConfig({
