@@ -18,9 +18,9 @@ export component SignIn(props: SignInProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountSignIn,
-    unmount: @clerk.unmountSignIn,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountSignIn,
+    unmount: clerk.unmountSignIn,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -29,9 +29,9 @@ export component SignUp(props: SignUpProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountSignUp,
-    unmount: @clerk.unmountSignUp,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountSignUp,
+    unmount: clerk.unmountSignUp,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -40,9 +40,9 @@ export component UserButton(props: UserButtonProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountUserButton,
-    unmount: @clerk.unmountUserButton,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountUserButton,
+    unmount: clerk.unmountUserButton,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -51,9 +51,9 @@ export component UserProfile(props: UserProfileProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountUserProfile,
-    unmount: @clerk.unmountUserProfile,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountUserProfile,
+    unmount: clerk.unmountUserProfile,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -62,9 +62,9 @@ export component GoogleOneTap(props: GoogleOneTapProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    open: @clerk.openGoogleOneTap,
-    close: @clerk.closeGoogleOneTap,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    open: clerk.openGoogleOneTap,
+    close: clerk.closeGoogleOneTap,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -73,9 +73,9 @@ export component Waitlist(props: WaitlistProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountWaitlist,
-    unmount: @clerk.unmountWaitlist,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountWaitlist,
+    unmount: clerk.unmountWaitlist,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -84,9 +84,9 @@ export component CreateOrganization(props: CreateOrganizationProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountCreateOrganization,
-    unmount: @clerk.unmountCreateOrganization,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountCreateOrganization,
+    unmount: clerk.unmountCreateOrganization,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -95,9 +95,9 @@ export component OrganizationProfile(props: OrganizationProfileProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountOrganizationProfile,
-    unmount: @clerk.unmountOrganizationProfile,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountOrganizationProfile,
+    unmount: clerk.unmountOrganizationProfile,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -106,9 +106,9 @@ export component OrganizationSwitcher(props: OrganizationSwitcherProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountOrganizationSwitcher,
-    unmount: @clerk.unmountOrganizationSwitcher,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountOrganizationSwitcher,
+    unmount: clerk.unmountOrganizationSwitcher,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -117,9 +117,9 @@ export component OrganizationList(props: OrganizationListProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountOrganizationList,
-    unmount: @clerk.unmountOrganizationList,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountOrganizationList,
+    unmount: clerk.unmountOrganizationList,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }
@@ -128,9 +128,9 @@ export component PricingTable(props: PricingTableProps) {
   const { clerk } = useClerkContext()
 
   <div {ref clerkHostRenderer({
-    mount: @clerk.mountPricingTable,
-    unmount: @clerk.unmountPricingTable,
-    updateProps: (@clerk as any).__unstable__updateProps,
+    mount: clerk.mountPricingTable,
+    unmount: clerk.unmountPricingTable,
+    updateProps: (clerk as any).__unstable__updateProps,
     props
   })}></div>
 }

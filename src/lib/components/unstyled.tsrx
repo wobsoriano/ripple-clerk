@@ -1,5 +1,4 @@
 import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/shared/types';
-import type { PropsWithChildren } from 'ripple'
 import { useClerkContext } from '../ClerkProvider.tsrx'
 
 type SignInButtonProps = _SignInButtonProps & {
@@ -13,16 +12,16 @@ export component SignInButton(props: SignInButtonProps) {
 	const { mode, style, class: className, ...rest } = props
 
   function onClick() {
-		if (!@clerk) {
+		if (!clerk) {
       return
     };
 
 		if (mode === 'modal') {
-			void @clerk.openSignIn(rest);
+			void clerk.openSignIn(rest);
 			return;
 		}
 
-		void @clerk.redirectToSignIn({
+		void clerk.redirectToSignIn({
 			...rest,
 			signInFallbackRedirectUrl: props.fallbackRedirectUrl,
 			signInForceRedirectUrl: props.forceRedirectUrl
@@ -43,16 +42,16 @@ export component SignUpButton(props: SignUpButtonProps) {
 	const { mode, style, class: className, ...rest } = props
 
   function onClick() {
-		if (!@clerk) {
+		if (!clerk) {
       return
     };
 
 		if (mode === 'modal') {
-			void @clerk.openSignUp(rest);
+			void clerk.openSignUp(rest);
 			return;
 		}
 
-		void @clerk.redirectToSignUp({
+		void clerk.redirectToSignUp({
 			...rest,
 			signUpFallbackRedirectUrl: props.fallbackRedirectUrl,
 			signUpForceRedirectUrl: props.forceRedirectUrl
@@ -73,11 +72,11 @@ export component SignOutButton(props: SignOutButtonProps) {
 	const { style, class: className, ...rest } = props
 
   function onClick() {
-		if (!@clerk) {
+		if (!clerk) {
       return
     };
 
-		@clerk.signOut(rest);
+		clerk.signOut(rest);
 	}
 
   <button type="button" style={style} class={className} {onClick}>{'Sign out'}</button>

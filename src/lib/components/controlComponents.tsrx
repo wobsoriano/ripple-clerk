@@ -7,32 +7,32 @@ import { createCheckAuthorization } from '@clerk/shared/authorization';
 export component SignedIn({ children }: PropsWithChildren<{}>) {
   const { auth } = useClerkContext()
 
-  if (@auth.userId) {
-    <@children />
+  if (auth.userId) {
+    { children }
   }
 }
 
 export component SignedOut({ children }: PropsWithChildren<{}>) {
   const { auth } = useClerkContext()
 
-  if (@auth.userId === null) {
-    <@children />
+  if (auth.userId === null) {
+    { children }
   }
 }
 
 export component ClerkLoaded({ children }: PropsWithChildren<{}>) {
   const { isLoaded } = useClerkContext()
 
-  if (@isLoaded) {
-    <@children />
+  if (isLoaded) {
+    { children }
   }
 }
 
 export component ClerkLoading({ children }: PropsWithChildren<{}>) {
   const { isLoaded } = useClerkContext()
 
-  if (!@isLoaded) {
-    <@children />
+  if (!isLoaded) {
+    { children }
   }
 }
 
@@ -41,19 +41,19 @@ export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: C
   const [children, fallback] = trackSplit(props, ['children', 'fallback'])
 
   const isAuthorized = track(() => {
-		const { userId } = @auth;
+		const { userId } = auth;
     const { role, condition, permission, feature, plan } = props
 
 		if (!userId) return false;
 
 		const has = createCheckAuthorization({
 			userId,
-			orgId: @auth.orgId,
-			orgRole: @auth.orgRole,
-			orgPermissions: @auth.orgPermissions,
-			factorVerificationAge: @auth.factorVerificationAge,
-			features: ((@auth.sessionClaims as JwtPayload | undefined)?.fea as string) || '',
-			plans: ((@auth.sessionClaims as JwtPayload | undefined)?.pla as string) || ''
+			orgId: auth.orgId,
+			orgRole: auth.orgRole,
+			orgPermissions: auth.orgPermissions,
+			factorVerificationAge: auth.factorVerificationAge,
+			features: ((auth.sessionClaims as JwtPayload | undefined)?.fea as string) || '',
+			plans: ((auth.sessionClaims as JwtPayload | undefined)?.pla as string) || ''
 		});
 
 		if (typeof condition === 'function') {
@@ -72,9 +72,9 @@ export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: C
 		return true;
 	});
 
-  if (@isAuthorized) {
-    <@children />
+  if (isAuthorized) {
+    { children }
   } else {
-    <@fallback />
+    <fallback />
   }
 }

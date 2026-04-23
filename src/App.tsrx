@@ -19,7 +19,7 @@ export component App() {
 		<SignedIn>
 			const { user } = useClerkContext()
       <p>{'You are signed in'}</p>
-			<p>{`Welcome, ${@user.fullName}`}</p>
+			<p>{`Welcome, ${user.fullName}`}</p>
 			<UserButton />
 		</SignedIn>
 		<SignedOut>
