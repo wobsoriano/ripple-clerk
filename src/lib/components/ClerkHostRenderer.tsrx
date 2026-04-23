@@ -1,5 +1,3 @@
-import { track } from 'ripple'
-
 type AnyObject = {}
 
 interface MountProps {

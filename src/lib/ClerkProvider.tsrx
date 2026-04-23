@@ -62,7 +62,7 @@ function watch(deps: Array<any>, cb: () => void) {
 	let first = true;
 
 	effect(() => {
-		deps.forEach((dep) => @dep);
+		deps.forEach((dep) => dep);
 
 		if (first) {
 			first = false;
@@ -75,20 +75,20 @@ function watch(deps: Array<any>, cb: () => void) {
 };
 
 export component ClerkProvider(props: ClerkProviderProps) {
-  let clerk = track(null)
-  let isLoaded = track(false)
-  let resources = track<Resources>({
+  let &[clerk] = track(null)
+  let &[isLoaded] = track(false)
+  let &[resources] = track<Resources>({
     client: undefined as unknown as ClientResource,
 		session: undefined,
 		user: undefined,
 		organization: undefined
   })
 
-	const auth = track(() => deriveState(@isLoaded, @resources, undefined))
-	const client = track(() => @resources.client)
-	const session = track(() => @auth.session)
-	const user = track(() => @auth.user)
-	const organization = track(() => @auth.organization)
+	const &[auth] = track(() => deriveState(isLoaded, resources, undefined))
+	const &[client] = track(() => resources.client)
+	const &[session] = track(() => auth.session)
+	const &[user] = track(() => auth.user)
+	const &[organization] = track(() => auth.organization)
 
 	clerkContext.set({
 		clerk,
@@ -100,22 +100,22 @@ export component ClerkProvider(props: ClerkProviderProps) {
 		organization
 	})
 
-	const [children, rest] = trackSplit(props, ['children'])
+	const &{ children, rest } = props
 
   async function loadClerk() {
-		await loadClerkJsScript({ ...@rest });
+		await loadClerkJsScript({ ...rest });
 
 		if (!window.Clerk) {
 			throw new Error('Clerk script failed to load');
 		}
 
-		@clerk = window.Clerk;
-		await window.Clerk.load({ ...@rest });
+		clerk = window.Clerk;
+		await window.Clerk.load({ ...rest });
 
-		@isLoaded = true;
+		isLoaded = true;
 
 		window.Clerk.addListener((payload) => {
-			@resources = payload
+			resources = payload
 		});
 	}
 
@@ -129,19 +129,19 @@ export component ClerkProvider(props: ClerkProviderProps) {
 	watch(
 		[appearance, localization],
 		() => {
-			if (!@clerk) {
+			if (!clerk) {
 				// @ts-expect-error: Internal unexposed Clerk property
-				@clerk.__unstable__updateProps({
+				clerk.__unstable__updateProps({
 					options: {
-						localization: @localization
+						localization: localization
 					},
-					appearance: @appearance
+					appearance: appearance
 				});
 			}
 		}
 	)
 
-	<@children />
+	{children}
 }
 
 export function useClerkContext() {
