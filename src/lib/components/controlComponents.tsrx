@@ -1,80 +1,88 @@
-import type { Component, PropsWithChildren } from 'ripple'
-import type { CheckAuthorizationWithCustomPermissions, JwtPayload, ProtectProps } from '@clerk/shared/types'
-import { track, trackSplit } from 'ripple'
-import { useClerkContext } from '../ClerkProvider.tsrx'
+import type { Component, PropsWithChildren } from 'ripple';
+import type {
+	CheckAuthorizationWithCustomPermissions,
+	JwtPayload,
+	ProtectProps,
+} from '@clerk/shared/types';
+import { track, trackSplit } from 'ripple';
+import { useClerkContext } from '../ClerkProvider.tsrx';
 import { createCheckAuthorization } from '@clerk/shared/authorization';
 
 export component SignedIn({ children }: PropsWithChildren<{}>) {
-  const { auth } = useClerkContext()
+	const { auth } = useClerkContext();
 
-  if (auth.userId) {
-    { children }
-  }
+	if (auth.userId) {
+		{children}
+	}
 }
 
 export component SignedOut({ children }: PropsWithChildren<{}>) {
-  const { auth } = useClerkContext()
+	const { auth } = useClerkContext();
 
-  if (auth.userId === null) {
-    { children }
-  }
+	if (auth.userId === null) {
+		{children}
+	}
 }
 
 export component ClerkLoaded({ children }: PropsWithChildren<{}>) {
-  const { isLoaded } = useClerkContext()
+	const { isLoaded } = useClerkContext();
 
-  if (isLoaded) {
-    { children }
-  }
+	if (isLoaded) {
+		{children}
+	}
 }
 
 export component ClerkLoading({ children }: PropsWithChildren<{}>) {
-  const { isLoaded } = useClerkContext()
+	const { isLoaded } = useClerkContext();
 
-  if (!isLoaded) {
-    { children }
-  }
+	if (!isLoaded) {
+		{children}
+	}
 }
 
 export component Protect(props: PropsWithChildren<ProtectProps> & { fallback?: Component }) {
-  const { auth } = useClerkContext()
-  const [children, fallback] = trackSplit(props, ['children', 'fallback'])
+	const { auth } = useClerkContext();
+	const [children, fallback] = trackSplit(props, ['children', 'fallback']);
 
-  const isAuthorized = track(() => {
+	const isAuthorized = track(() => {
 		const { userId } = auth;
-    const { role, condition, permission, feature, plan } = props
+		const { role, condition, permission, feature, plan } = props;
 
 		if (!userId) return false;
 
-		const has = createCheckAuthorization({
-			userId,
-			orgId: auth.orgId,
-			orgRole: auth.orgRole,
-			orgPermissions: auth.orgPermissions,
-			factorVerificationAge: auth.factorVerificationAge,
-			features: ((auth.sessionClaims as JwtPayload | undefined)?.fea as string) || '',
-			plans: ((auth.sessionClaims as JwtPayload | undefined)?.pla as string) || ''
-		});
+		const has = createCheckAuthorization(
+			{
+				userId,
+				orgId: auth.orgId,
+				orgRole: auth.orgRole,
+				orgPermissions: auth.orgPermissions,
+				factorVerificationAge: auth.factorVerificationAge,
+				features: (auth.sessionClaims as JwtPayload | undefined)?.fea as string || '',
+				plans: (auth.sessionClaims as JwtPayload | undefined)?.pla as string || '',
+			},
+		);
 
 		if (typeof condition === 'function') {
 			return condition(has);
 		}
 
 		if (role || permission || feature || plan) {
-			return has({
-				role,
-				permission,
-				feature,
-				plan
-			} as Parameters<CheckAuthorizationWithCustomPermissions>[0]);
+			return has(
+				{
+					role,
+					permission,
+					feature,
+					plan,
+				} as Parameters<CheckAuthorizationWithCustomPermissions>[0],
+			);
 		}
 
 		return true;
 	});
 
-  if (isAuthorized) {
-    { children }
-  } else {
-    <fallback />
-  }
+	if (isAuthorized) {
+		{children}
+	} else {
+		<fallback />
+	}
 }

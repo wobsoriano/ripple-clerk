@@ -1,4 +1,4 @@
-type AnyObject = {}
+type AnyObject = {};
 
 interface MountProps {
 	mount: (node: HTMLDivElement, props: AnyObject) => void;
@@ -13,28 +13,28 @@ interface OpenProps {
 	props?: AnyObject;
 }
 
-const isMountProps = (props: AnyObject): props is MountProps => {
+const isMountProps = (props: AnyObject): /* Unknown: TSTypePredicate */ => {
 	return 'mount' in props;
 };
 
-const isOpenProps = (props: AnyObject): props is OpenProps => {
+const isOpenProps = (props: AnyObject): /* Unknown: TSTypePredicate */ => {
 	return 'open' in props;
 };
 
 export function clerkHostRenderer(props: MountProps | OpenProps) {
-  return (node: HTMLDivElement) => {
-    if (isMountProps(props)) {
-      props.mount(node, props.props);
-    } else if (isOpenProps(props)) {
-      props.open(props.props);
-    }
+	return (node: HTMLDivElement) => {
+		if (isMountProps(props)) {
+			props.mount(node, props.props);
+		} else if (isOpenProps(props)) {
+			props.open(props.props);
+		}
 
-    return () => {
-      if (isMountProps(props)) {
+		return () => {
+			if (isMountProps(props)) {
 				props.unmount(node);
 			} else if (isOpenProps(props)) {
 				props.close();
 			}
-    }
-  }
+		};
+	};
 }

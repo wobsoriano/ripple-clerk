@@ -9,22 +9,22 @@ import type {
 	Resources,
 	SessionStatusClaim,
 	SignedInSessionResource,
-	UserResource
+	UserResource,
 } from '@clerk/shared/types';
 import { loadClerkJsScript } from '@clerk/shared/loadClerkJsScript';
-import { Context, effect, track, trackSplit, type Tracked, untrack } from 'ripple'
-import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types'
-import { deriveState } from '@clerk/shared/deriveState'
-import { errorThrower } from './errors/errorThrower'
+import { Context, effect, track, trackSplit, type Tracked, untrack } from 'ripple';
+import type { BrowserClerk, ClerkProviderProps, HeadlessBrowserClerk } from './types';
+import { deriveState } from '@clerk/shared/deriveState';
+import { errorThrower } from './errors/errorThrower';
 
 interface ClerkContext {
 	/**
-	 * See https://clerk.com/docs/references/javascript/clerk
-	 */
+ * See https://clerk.com/docs/references/javascript/clerk
+ */
 	clerk: Tracked<HeadlessBrowserClerk | BrowserClerk | null>;
 	/**
-	 * Check if the Clerk object is ready for use or not
-	 */
+ * Check if the Clerk object is ready for use or not
+ */
 	isLoaded: Tracked<boolean>;
 	auth: Tracked<{
 		userId: string | null | undefined;
@@ -39,24 +39,24 @@ interface ClerkContext {
 		factorVerificationAge: [number, number] | null;
 	}>;
 	/**
-	 * See https://clerk.com/docs/references/javascript/client
-	 */
+ * See https://clerk.com/docs/references/javascript/client
+ */
 	client: Tracked<ClientResource | null | undefined>;
 	/**
-	 * See https://clerk.com/docs/references/javascript/session
-	 */
+ * See https://clerk.com/docs/references/javascript/session
+ */
 	session: Tracked<SignedInSessionResource | null | undefined>;
 	/**
-	 * See https://clerk.com/docs/references/javascript/user
-	 */
+ * See https://clerk.com/docs/references/javascript/user
+ */
 	user: Tracked<UserResource | null | undefined>;
 	/**
-	 * See https://clerk.com/docs/references/javascript/organization
-	 */
+ * See https://clerk.com/docs/references/javascript/organization
+ */
 	organization: Tracked<OrganizationResource | null | undefined>;
 }
 
-const clerkContext = new Context({} as ClerkContext)
+const clerkContext = new Context({} as ClerkContext);
 
 function watch(deps: Array<any>, cb: () => void) {
 	let first = true;
@@ -72,37 +72,42 @@ function watch(deps: Array<any>, cb: () => void) {
 
 		return untrack(cb);
 	});
-};
+}
+
 
 export component ClerkProvider(props: ClerkProviderProps) {
-  let &[clerk] = track(null)
-  let &[isLoaded] = track(false)
-  let &[resources] = track<Resources>({
-    client: undefined as unknown as ClientResource,
-		session: undefined,
-		user: undefined,
-		organization: undefined
-  })
+	let &[clerk] = track(null);
+	let &[isLoaded] = track(false);
+	let &[resources] = track<Resources>(
+		{
+			client: undefined as unknown as ClientResource,
+			session: undefined,
+			user: undefined,
+			organization: undefined,
+		},
+	);
 
-	const &[auth] = track(() => deriveState(isLoaded, resources, undefined))
-	const &[client] = track(() => resources.client)
-	const &[session] = track(() => auth.session)
-	const &[user] = track(() => auth.user)
-	const &[organization] = track(() => auth.organization)
+	const &[auth] = track(() => deriveState(isLoaded, resources, undefined));
+	const &[client] = track(() => resources.client);
+	const &[session] = track(() => auth.session);
+	const &[user] = track(() => auth.user);
+	const &[organization] = track(() => auth.organization);
 
-	clerkContext.set({
-		clerk,
-		isLoaded,
-		auth,
-		client,
-		session,
-		user,
-		organization
-	})
+	clerkContext.set(
+		{
+			clerk,
+			isLoaded,
+			auth,
+			client,
+			session,
+			user,
+			organization,
+		},
+	);
 
-	const &{ children, rest } = props
+	const &{ children, rest } = props;
 
-  async function loadClerk() {
+	async function loadClerk() {
 		await loadClerkJsScript({ ...rest });
 
 		if (!window.Clerk) {
@@ -115,43 +120,42 @@ export component ClerkProvider(props: ClerkProviderProps) {
 		isLoaded = true;
 
 		window.Clerk.addListener((payload) => {
-			resources = payload
+			resources = payload;
 		});
 	}
 
-  effect(() => {
-		untrack(loadClerk)
-  })
+	effect(() => {
+		untrack(loadClerk);
+	});
 
-	const appearance = track(() => props.appearance)
-	const localization = track(() => props.localization)
+	const appearance = track(() => props.appearance);
+	const localization = track(() => props.localization);
 
-	watch(
-		[appearance, localization],
-		() => {
-			if (!clerk) {
-				// @ts-expect-error: Internal unexposed Clerk property
-				clerk.__unstable__updateProps({
+	watch([appearance, localization], () => {
+		if (!clerk) {
+			// @ts-expect-error: Internal unexposed Clerk property
+			clerk.__unstable__updateProps(
+				{
 					options: {
-						localization: localization
+						localization: localization,
 					},
-					appearance: appearance
-				});
-			}
+					appearance: appearance,
+				},
+			);
 		}
-	)
+	});
 
 	{children}
 }
 
 export function useClerkContext() {
-  const ctx = clerkContext.get();
+	const ctx = clerkContext.get();
 
 	if (!Object.keys(ctx).length) {
-    return errorThrower.throw(
-      `useClerkContext can only be used within the <ClerkProvider> component.`,
-    );
-  }
+		return errorThrower.throw(
+			`useClerkContext can only be used within the <ClerkProvider> component.`,
+		);
+	}
 
-	return ctx
+	return ctx;
 }

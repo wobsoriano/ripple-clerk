@@ -1,136 +1,180 @@
 import type {
-  OrganizationProfileProps,
-  OrganizationListProps,
-  OrganizationSwitcherProps,
-  PricingTableProps,
+	OrganizationProfileProps,
+	OrganizationListProps,
+	OrganizationSwitcherProps,
+	PricingTableProps,
 	SignInProps,
-  SignUpProps,
-  UserButtonProps,
-  UserProfileProps,
-  GoogleOneTapProps,
-WaitlistProps,
-CreateOrganizationProps
-} from '@clerk/shared/types'
-import { clerkHostRenderer } from './ClerkHostRenderer.tsrx'
-import { useClerkContext } from '../ClerkProvider.tsrx'
+	SignUpProps,
+	UserButtonProps,
+	UserProfileProps,
+	GoogleOneTapProps,
+	WaitlistProps,
+	CreateOrganizationProps,
+} from '@clerk/shared/types';
+import { clerkHostRenderer } from './ClerkHostRenderer.tsrx';
+import { useClerkContext } from '../ClerkProvider.tsrx';
 
 export component SignIn(props: SignInProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountSignIn,
-    unmount: clerk.unmountSignIn,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountSignIn,
+				unmount: clerk.unmountSignIn,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component SignUp(props: SignUpProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountSignUp,
-    unmount: clerk.unmountSignUp,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountSignUp,
+				unmount: clerk.unmountSignUp,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component UserButton(props: UserButtonProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountUserButton,
-    unmount: clerk.unmountUserButton,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountUserButton,
+				unmount: clerk.unmountUserButton,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component UserProfile(props: UserProfileProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountUserProfile,
-    unmount: clerk.unmountUserProfile,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountUserProfile,
+				unmount: clerk.unmountUserProfile,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component GoogleOneTap(props: GoogleOneTapProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    open: clerk.openGoogleOneTap,
-    close: clerk.closeGoogleOneTap,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				open: clerk.openGoogleOneTap,
+				close: clerk.closeGoogleOneTap,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component Waitlist(props: WaitlistProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountWaitlist,
-    unmount: clerk.unmountWaitlist,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountWaitlist,
+				unmount: clerk.unmountWaitlist,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component CreateOrganization(props: CreateOrganizationProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountCreateOrganization,
-    unmount: clerk.unmountCreateOrganization,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountCreateOrganization,
+				unmount: clerk.unmountCreateOrganization,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component OrganizationProfile(props: OrganizationProfileProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountOrganizationProfile,
-    unmount: clerk.unmountOrganizationProfile,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountOrganizationProfile,
+				unmount: clerk.unmountOrganizationProfile,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component OrganizationSwitcher(props: OrganizationSwitcherProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountOrganizationSwitcher,
-    unmount: clerk.unmountOrganizationSwitcher,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountOrganizationSwitcher,
+				unmount: clerk.unmountOrganizationSwitcher,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component OrganizationList(props: OrganizationListProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountOrganizationList,
-    unmount: clerk.unmountOrganizationList,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountOrganizationList,
+				unmount: clerk.unmountOrganizationList,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }
 
 export component PricingTable(props: PricingTableProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-  <div {ref clerkHostRenderer({
-    mount: clerk.mountPricingTable,
-    unmount: clerk.unmountPricingTable,
-    updateProps: (clerk as any).__unstable__updateProps,
-    props
-  })}></div>
+	<div
+		{ref clerkHostRenderer(
+			{
+				mount: clerk.mountPricingTable,
+				unmount: clerk.unmountPricingTable,
+				updateProps: (clerk as any).__unstable__updateProps,
+				props,
+			},
+		)}
+	/>
 }

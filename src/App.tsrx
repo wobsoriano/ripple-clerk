@@ -1,63 +1,56 @@
 import { effect, track } from 'ripple';
-import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.tsrx'
-import {
-	ClerkLoading,
-	SignedIn,
-	SignedOut,
-	SignInButton,
-	SignIn,
-	UserButton
-} from '$lib/index.js'
+import { ClerkProvider, useClerkContext } from './lib/ClerkProvider.tsrx';
+import { ClerkLoading, SignedIn, SignedOut, SignInButton, SignIn, UserButton } from '$lib/index.js';
 
 export component App() {
 	<ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
-		<div class='container'>
-		<h1>{'Welcome to Ripple + Clerk!'}</h1>
-		<ClerkLoading>
-			<p>{'Clerk loading..'}</p>
-		</ClerkLoading>
-		<SignedIn>
-			const { user } = useClerkContext()
-      <p>{'You are signed in'}</p>
-			<p>{`Welcome, ${user.fullName}`}</p>
-			<UserButton />
-		</SignedIn>
-		<SignedOut>
-      <p>{'You are signed out'}</p>
-			<SignIn />
-			<SignInButton mode="modal" />
-		</SignedOut>
-	</div>
-</ClerkProvider>
+		<div class="container">
+			<h1>{'Welcome to Ripple + Clerk!'}</h1>
+			<ClerkLoading>
+				<p>{'Clerk loading..'}</p>
+			</ClerkLoading>
+			<SignedIn>
+				const { user } = useClerkContext();
+				<p>{'You are signed in'}</p>
+				<p>{`Welcome, ${user.fullName}`}</p>
+				<UserButton />
+			</SignedIn>
+			<SignedOut>
+				<p>{'You are signed out'}</p>
+				<SignIn />
+				<SignInButton mode="modal" />
+			</SignedOut>
+		</div>
+	</ClerkProvider>
 
 	<style>
-	  .container {
+		.container {
 			text-align: center;
-			font-family: "Arial", sans-serif;
+			font-family: 'Arial', sans-serif;
 		}
-		  p {
+		p {
 			margin: 12px 0;
-			font-family: "Arial", sans-serif;
+			font-family: 'Arial', sans-serif;
 		}
-		  code {
+		code {
 			background: #f4f4f4;
 			padding: 2px 6px;
 			border-radius: 4px;
-			font-family: "Courier New", monospace;
+			font-family: 'Courier New', monospace;
 			color: #333;
 		}
-		  button {
+		button {
 			font-size: 1.5em;
 			padding: 6px 12px;
 			margin: 0 6px;
 			cursor: pointer;
 			border: none;
-			font-family: "Courier New", monospace;
+			font-family: 'Courier New', monospace;
 		}
-		  button {
+		button {
 			background-color: #e0e0e0;
 		}
-		  .count {
+		.count {
 			margin: 0 12px;
 			font-size: 1.5em;
 		}

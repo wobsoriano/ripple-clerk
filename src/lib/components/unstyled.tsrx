@@ -1,83 +1,94 @@
-import type { SignInButtonProps as _SignInButtonProps, SignUpButtonProps as _SignUpButtonProps, SignOutOptions } from '@clerk/shared/types';
-import { useClerkContext } from '../ClerkProvider.tsrx'
+import type {
+	SignInButtonProps as _SignInButtonProps,
+	SignUpButtonProps as _SignUpButtonProps,
+	SignOutOptions,
+} from '@clerk/shared/types';
+import { useClerkContext } from '../ClerkProvider.tsrx';
 
 type SignInButtonProps = _SignInButtonProps & {
-  style?: string
-  class?: string
-}
+	style?: string;
+	class?: string;
+};
 
 export component SignInButton(props: SignInButtonProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-	const { mode, style, class: className, ...rest } = props
+	const { mode, style, class: className, ...rest } = props;
 
-  function onClick() {
+	function onClick() {
 		if (!clerk) {
-      return
-    };
+			return;
+		}
+
 
 		if (mode === 'modal') {
 			void clerk.openSignIn(rest);
 			return;
 		}
 
-		void clerk.redirectToSignIn({
-			...rest,
-			signInFallbackRedirectUrl: props.fallbackRedirectUrl,
-			signInForceRedirectUrl: props.forceRedirectUrl
-		});
+		void clerk.redirectToSignIn(
+			{
+				...rest,
+				signInFallbackRedirectUrl: props.fallbackRedirectUrl,
+				signInForceRedirectUrl: props.forceRedirectUrl,
+			},
+		);
 	}
 
-  <button type="button" style={props.style} class={props.class} {onClick}>{'Sign in'}</button>
+	<button type="button" style={props.style} class={props.class} {onClick}>{'Sign in'}</button>
 }
 
 type SignUpButtonProps = _SignUpButtonProps & {
-  style?: string
-  class?: string
-}
+	style?: string;
+	class?: string;
+};
 
 export component SignUpButton(props: SignUpButtonProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-	const { mode, style, class: className, ...rest } = props
+	const { mode, style, class: className, ...rest } = props;
 
-  function onClick() {
+	function onClick() {
 		if (!clerk) {
-      return
-    };
+			return;
+		}
+
 
 		if (mode === 'modal') {
 			void clerk.openSignUp(rest);
 			return;
 		}
 
-		void clerk.redirectToSignUp({
-			...rest,
-			signUpFallbackRedirectUrl: props.fallbackRedirectUrl,
-			signUpForceRedirectUrl: props.forceRedirectUrl
-		});
+		void clerk.redirectToSignUp(
+			{
+				...rest,
+				signUpFallbackRedirectUrl: props.fallbackRedirectUrl,
+				signUpForceRedirectUrl: props.forceRedirectUrl,
+			},
+		);
 	}
 
-  <button type="button" style={style} class={className} {onClick}>{'Sign up'}</button>
+	<button type="button" {style} class={className} {onClick}>{'Sign up'}</button>
 }
 
 type SignOutButtonProps = SignOutOptions & {
-  style?: string
-  class?: string
-}
+	style?: string;
+	class?: string;
+};
 
 export component SignOutButton(props: SignOutButtonProps) {
-  const { clerk } = useClerkContext()
+	const { clerk } = useClerkContext();
 
-	const { style, class: className, ...rest } = props
+	const { style, class: className, ...rest } = props;
 
-  function onClick() {
+	function onClick() {
 		if (!clerk) {
-      return
-    };
+			return;
+		}
+
 
 		clerk.signOut(rest);
 	}
 
-  <button type="button" style={style} class={className} {onClick}>{'Sign out'}</button>
+	<button type="button" {style} class={className} {onClick}>{'Sign out'}</button>
 }

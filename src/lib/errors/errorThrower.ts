@@ -11,5 +11,5 @@ export { errorThrower };
  * @internal
  */
 export function setErrorThrowerOptions(options: ErrorThrowerOptions) {
-  errorThrower.setMessages(options).setPackageName(options);
+	errorThrower.setMessages(options).setPackageName(options);
 }
