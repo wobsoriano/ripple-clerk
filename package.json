@@ -29,16 +29,16 @@
   	"eslint": "^9.0.0",
   	"@tsrx/eslint-plugin": "^0.3.26",
     "@tsrx/prettier-plugin": "^0.3.26",
-		"@tsrx/eslint-parser": "^0.3.26",
-		"@typescript-eslint/parser": "^8.20.0",
-		"bumpp": "^10.2.3",
-		"prettier": "^3.6.2",
-		"prettier-plugin-ripple": "^0.2.98",
-		"ripple": "^0.2.98",
-		"typescript": "^5.9.3",
-		"vite": "^8.0.0 ",
-		"@ripple-ts/vite-plugin": "^0.3.26",
-		"@tsrx/typescript-plugin": "^0.3.26"
+	"@tsrx/eslint-parser": "^0.3.26",
+	"@typescript-eslint/parser": "^8.20.0",
+	"bumpp": "^10.2.3",
+	"prettier": "^3.6.2",
+	"prettier-plugin-ripple": "^0.2.98",
+	"ripple": "^0.2.98",
+	"typescript": "^5.9.3",
+	"vite": "^8.0.0 ",
+	"@ripple-ts/vite-plugin": "^0.3.26",
+	"@tsrx/typescript-plugin": "^0.3.26"
 	},
 	"dependencies": {
 		"@clerk/shared": "^4.8.3"
